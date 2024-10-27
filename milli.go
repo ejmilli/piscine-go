@@ -6,26 +6,45 @@ import (
 	"github.com/01-edu/z01"
 )
 
+func isLower(r rune) bool {
+	if r >= 'a' && r <= 'z' {
+		return true
+	}
+	return false
+}
+
+func isUpper(r rune) bool {
+	if r >= 'A' && r <= 'Z' {
+		return true
+	}
+	return false
+}
+
+func reverseStrCap(s string) string {
+   result := []rune(s)
+
+for i := 0; i < len(result); i++ {
+  if i == len(result)-1 || result[i+1] == ' ' {
+    if isLower(result[i]) {
+        result[i] -= 32
+}
+} else if isUpper(result[i]) {
+     result[i] += 32
+}
+}
+return string(result)
+}
+
 func main() {
-	if len(os.Args) != 2 {
-		return
-	}
+  if len(os.Args) > 1 {
+  for _, args := range os.Args[1:] {
+    result := reverseStrCap(args)
 
-	args := os.Args[1]
-	inWord := false
-	for i, char := range args {
-		if char == ' ' || char == '\t' {
-			if inWord && i != 0 && args[i-1] != ' ' && args[i-1] != '\t' {
-				z01.PrintRune(' ')
-				z01.PrintRune(' ')
-				z01.PrintRune(' ')
+for _, char := range result {
 
-			}
-		} else {
-			z01.PrintRune(char)
-			inWord = true
-		}
-		
-	}
-	z01.PrintRune('\n')
+z01.PrintRune(char)
+}
+z01.PrintRune('\n')
+} 
+}
 }
