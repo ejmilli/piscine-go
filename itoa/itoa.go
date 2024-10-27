@@ -29,7 +29,7 @@ func Itoa(n int) string {
 	}
 
 	if isNegative {
-		result = "-" + result
+		result = string('-') + result
 	}
 
 	return result
