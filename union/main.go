@@ -5,6 +5,8 @@ import (
 
 	"github.com/01-edu/z01"
 )
+
+
 func isContain(s string, r rune) bool {
 	for _, char := range s {
 		if char == r {
@@ -14,9 +16,11 @@ func isContain(s string, r rune) bool {
 	return false
 }
 
+
 func main() {
 
 	if len(os.Args) != 3 {
+		z01.PrintRune('\n')
 		return
 	}
 
@@ -26,12 +30,12 @@ func main() {
 	result := ""
 
 	for _, char := range str1 {
-		if isContain(str2, char) && !isContain(result, char) {
+		if  !isContain(result, char) {
 			result += string(char)
 		}
 	}
 	for _, char := range str2 {
-		if isContain(str1, char) && !isContain(result, char) {
+		if  !isContain(result, char) {
 			result += string(char)
 		}
 	}
