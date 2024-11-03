@@ -2,8 +2,8 @@ package main
 
 import (
 	"os"
-
 	"github.com/01-edu/z01"
+
 )
 
 func FormString(str1, str2 string) bool {
@@ -19,14 +19,14 @@ func FormString(str1, str2 string) bool {
 }
 
 func main() {
-	args := os.Args
+
 
 	if len(os.Args) != 3 {
 		return
 	}
 
-	str1 := args[1]
-	str2 := args[2]
+	str1 := os.Args[1]
+	str2 := os.Args[2]
 
 	if FormString(str1, str2) {
 		for _, char := range str1 {
