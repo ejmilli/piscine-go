@@ -1,35 +1,25 @@
 package main
 
 import (
-	"os"
-
-	"github.com/01-edu/z01"
+	"fmt"
+	
 )
 
-
 func main() {
-
-if len(os.Args) != 3 {
-
-  return 
+	fmt.Print(FromTo(1, 10))
+	fmt.Print(FromTo(10, 1))
+	fmt.Print(FromTo(10, 10))
+	fmt.Print(FromTo(100, 10))
 }
 
-i := 0
-j := 0
+func FromTo(from int, to int) string {
+   if from < 0 || from > 99 || to < 0 || to > 99 {
+    return "Invalid" + "\n"
+   }
 
-str1 := os.Args[1]
-str2 := os.Args[2]
+   if from == to {
+       
 
-for i < len(str1) && j < len(str2) {
-  if str1[i] == str2[j] {
-    i++
-  }
-j++
-}
+   }
 
-if i == len(str1) {
-  z01.PrintRune('1')
-}  else {
-  z01.PrintRune('0')
-}
 }
