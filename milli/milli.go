@@ -2,60 +2,35 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 )
 
 func main() {
-	fmt.Print(FromTo(1, 10))
-	fmt.Print(FromTo(10, 1))
-	fmt.Print(FromTo(10, 10))
-	fmt.Print(FromTo(100, 10))
+	fmt.Println(IsCapitalized("Hello! How are you?"))
+	fmt.Println(IsCapitalized("Hello How Are You"))
+	fmt.Println(IsCapitalized("Whats 4this 100K?"))
+	fmt.Println(IsCapitalized("Whatsthis4"))
+	fmt.Println(IsCapitalized("!!!!Whatsthis4"))
+	fmt.Println(IsCapitalized(""))
 }
 
-func FromTo(from int, to int) string {
-   if from < 0 || from > 99 || to < 0 || to > 99 {
-    return "Invalid\n" 
-   }
-
-   var result string
-
-  if from == to {
-    if from < 10 {
-      result += "0" + strconv.Itoa(from)
-    } else {
-      result +=  strconv.Itoa(from)
-    }
-  }
-
-  if from < to {
-    for i := from; i <= to ; i++ {
-      if i < 10 {
-        result += "0" + strconv.Itoa(i)
-      } else {
-        result +=  strconv.Itoa(i)
-      }
-
-      if i != to {
-        result += ", "
-      }
-    }
-  }
-
-  if from > to {
-    for i := from; i >= to; i-- {
-
-      if i < 10 {
-        result += "0" + strconv.Itoa(i)
-    } else {
-      result +=  strconv.Itoa(i)
-    }
-   
-    if i != to {
-      result += ", "
-    }
-  }
-
-
+func isLower(s byte) bool {
+  return s >= 'a' && s <= 'z'
 }
-return result + "\n"
+
+func IsCapitalized(s string) bool {
+  if len(s) == 0 {
+    return false
+  }
+
+  for i := 0; i < len(s); i++ {
+    if i != 0 && s[i-1] == ' ' && isLower(s[i]) {
+      return false
+    }
+
+    if isLower(s[0])  {
+      return false
+    }
+  }
+
+  return true
 }
