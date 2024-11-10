@@ -5,32 +5,26 @@ import (
 )
 
 func main() {
-	fmt.Println(IsCapitalized("Hello! How are you?"))
-	fmt.Println(IsCapitalized("Hello How Are You"))
-	fmt.Println(IsCapitalized("Whats 4this 100K?"))
-	fmt.Println(IsCapitalized("Whatsthis4"))
-	fmt.Println(IsCapitalized("!!!!Whatsthis4"))
-	fmt.Println(IsCapitalized(""))
+	fmt.Print(ThirdTimeIsACharm("123456789"))
+	fmt.Print(ThirdTimeIsACharm(""))
+	fmt.Print(ThirdTimeIsACharm("a b c d e f"))
+	fmt.Print(ThirdTimeIsACharm("12"))
 }
 
-func isLower(s byte) bool {
-  return s >= 'a' && s <= 'z'
+func ThirdTimeIsACharm(str string) string {
+
+if len(str) == 0 {
+  return "\n"
 }
 
-func IsCapitalized(s string) bool {
-  if len(s) == 0 {
-    return false
-  }
+if len(str) < 3 {
+  return "\n"
+}
 
-  for i := 0; i < len(s); i++ {
-    if i != 0 && s[i-1] == ' ' && isLower(s[i]) {
-      return false
-    }
+var result string
 
-    if isLower(s[0])  {
-      return false
-    }
-  }
-
-  return true
+for i := 2; i < len(str); i+=3 {
+  result += string(str[i])
+}
+return result + "\n"
 }
