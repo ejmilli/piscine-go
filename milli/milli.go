@@ -1,39 +1,35 @@
 package main
 
 import (
-	"fmt"
 	"os"
-	"strconv"
+
+	"github.com/01-edu/z01"
 )
 
-func printFactor(n int) {
-
-	if n <= 1 {
-		return
-	}
-
-	factor := 2
-	for n > 1 {
-		if n%factor == 0 {
-			fmt.Print(factor)
-			n /= factor
-			if n > 1 {
-				fmt.Print("*")
-			}
-		} else {
-			factor++
-		}
-	}
-
-}
 
 func main() {
 
-	if len(os.Args) == 2 {
-		input, err := strconv.Atoi(os.Args[1])
-		if err == nil {
-			printFactor(input)
-		}
-		fmt.Println()
-	}
+if len(os.Args) != 3 {
+
+  return 
+}
+
+i := 0
+j := 0
+
+str1 := os.Args[1]
+str2 := os.Args[2]
+
+for i < len(str1) && j < len(str2) {
+  if str1[i] == str2[j] {
+    i++
+  }
+j++
+}
+
+if i == len(str1) {
+  z01.PrintRune('1')
+}  else {
+  z01.PrintRune('0')
+}
 }
