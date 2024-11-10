@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	
+	"strconv"
 )
 
 func main() {
@@ -14,12 +14,48 @@ func main() {
 
 func FromTo(from int, to int) string {
    if from < 0 || from > 99 || to < 0 || to > 99 {
-    return "Invalid" + "\n"
+    return "Invalid\n" 
    }
 
-   if from == to {
-       
+   var result string
 
-   }
+  if from == to {
+    if from < 10 {
+      result += "0" + strconv.Itoa(from)
+    } else {
+      result +=  strconv.Itoa(from)
+    }
+  }
 
+  if from < to {
+    for i := from; i <= to ; i++ {
+      if i < 10 {
+        result += "0" + strconv.Itoa(i)
+      } else {
+        result +=  strconv.Itoa(i)
+      }
+
+      if i != to {
+        result += ", "
+      }
+    }
+  }
+
+  if from > to {
+    for i := from; i >= to; i-- {
+
+      if i < 10 {
+        result += "0" + strconv.Itoa(i)
+    } else {
+      result +=  strconv.Itoa(i)
+    }
+   
+    if i != to {
+      result += ", "
+    }
+  }
+
+
+}
+return result + "\n"
 }
