@@ -2,29 +2,42 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 )
 
 func main() {
-	fmt.Println(ZipString("YouuungFellllas"))
-	fmt.Println(ZipString("Thee quuick browwn fox juumps over the laaazy dog"))
-	fmt.Println(ZipString("Helloo Therre!"))
+	input1 := []uint{2, 3, 1, 1, 4}
+	fmt.Println(CanJump(input1))
+
+	input2 := []uint{3, 2, 1, 0, 4}
+	fmt.Println(CanJump(input2))
+
+	input3 := []uint{0}
+	fmt.Println(CanJump(input3))
 }
 
-func ZipString(s string) string {
-
-var result string 
-i := 0 
-
-for i < len(s) {
-  char := s[i]
-  count := 1
-  for i+1 < len(s) && s[i+1] == char {
-    count++
-    i++
+func max(a, b int) int {
+  if a > b {
+    return a
   }
-  result += strconv.Itoa(count) + string(char)
-  i++
+  return b
 }
-return result
+
+func CanJump(steps []uint) bool {
+  
+  if len(steps) == 0 {
+    return false
+  }
+
+  maxjump := 0
+  for i := 0; i < len(steps); i++ {
+    if i > maxjump {
+      return false
+    }
+    maxjump = max(maxjump, i+int(steps[i]))
+
+    if maxjump >= len(steps)-1 {
+      return true
+    }
+  }
+return false
 }
