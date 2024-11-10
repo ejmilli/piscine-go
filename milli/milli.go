@@ -5,39 +5,23 @@ import (
 )
 
 func main() {
-	input1 := []uint{2, 3, 1, 1, 4}
-	fmt.Println(CanJump(input1))
-
-	input2 := []uint{3, 2, 1, 0, 4}
-	fmt.Println(CanJump(input2))
-
-	input3 := []uint{0}
-	fmt.Println(CanJump(input3))
+	fmt.Println(ConcatSlice([]int{1, 2, 3}, []int{4, 5, 6}))
+	fmt.Println(ConcatSlice([]int{}, []int{4, 5, 6, 7, 8, 9}))
+	fmt.Println(ConcatSlice([]int{1, 2, 3}, []int{}))
 }
 
-func max(a, b int) int {
-  if a > b {
-    return a
-  }
-  return b
-}
+func ConcatSlice(slice1, slice2 []int) []int {
+   
 
-func CanJump(steps []uint) bool {
-  
-  if len(steps) == 0 {
-    return false
+  var result []int
+
+  for _, char := range slice1 {
+    result = append(result, char)
   }
 
-  maxjump := 0
-  for i := 0; i < len(steps); i++ {
-    if i > maxjump {
-      return false
-    }
-    maxjump = max(maxjump, i+int(steps[i]))
-
-    if maxjump >= len(steps)-1 {
-      return true
-    }
+  for _, char := range slice2 {
+    result = append(result, char)
   }
-return false
+
+  return result
 }
