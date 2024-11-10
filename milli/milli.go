@@ -2,46 +2,31 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 )
 
 func main() {
-	fmt.Println(WeAreUnique("foo", "boo"))
-	fmt.Println(WeAreUnique("", ""))
-	fmt.Println(WeAreUnique("abc", "def"))
+	fmt.Println(ZipString("YouuungFellllas"))
+	fmt.Println(ZipString("Thee quuick browwn fox juumps over the laaazy dog"))
+	fmt.Println(ZipString("Helloo Therre!"))
 }
 
-func isContain(s string, r rune) bool {
-	for _, char := range s {
-		if char == r {
-			return true
-		}
-	}
-	return false
-}
+func ZipString(s string) string  {
 
 
+  var result string 
+  i := 0
 
-func WeAreUnique(str1, str2 string) int {
+  for i < len(s) {
 
-if len(str1) == 0 && len(str2) == 0 {
-  return -1
-}
-
-if str1 == str2 {
-  return 0
-}
-
-var result string
-
-for _, char := range str1 {
-  if !isContain(str2, char) && !isContain(result, char) {
-    result += string(char)
+    char := s[i]
+    count := 1
+    for i+1 < len(s) && s[i+1] == char {
+      count++
+      i++
+    }
+    result += strconv.Itoa(count) + string(char)
+    i++
   }
-}
-for _, char := range str2 {
-  if !isContain(str1, char) && !isContain(result, char) {
-    result += string(char)
-  }
-}
-return len(result)
+return result
 }
