@@ -1,35 +1,48 @@
 package main
 
 import (
-	"fmt"
+	"os"
+
+	"github.com/01-edu/z01"
 )
 
-func main() {
-	fmt.Println(SaveAndMiss("123456789", 3))
-	fmt.Println(SaveAndMiss("abcdefghijklmnopqrstuvwyz", 3))
-	fmt.Println(SaveAndMiss("", 3))
-	fmt.Println(SaveAndMiss("hello you all ! ", 0))
-	fmt.Println(SaveAndMiss("what is your name?", 0))
-	fmt.Println(SaveAndMiss("go Exercise Save and Miss", -5))
+
+func isLower(s rune) bool {
+
+return s >= 'a' && s <= 'z'
 }
 
+func isUpper(s rune) bool {
+  return s >= 'A' && s <= 'Z'
+}
 
-func SaveAndMiss(arg string, num int) string {
+func reverseStrCap(str string) string {
 
-  if num <= 0 {
-   return arg
-  }
+  result := []rune(str)
 
-  var result string
-
-  for i := 0; i < len(arg); i += 2 * num {
-
-    end := i + num 
-      if  end > len(arg) {
-        end = len(arg)
+  for i := 0; i < len(result); i++ {
+    if i == len(result)-1 || result[i+1] == ' ' {
+      if isLower(result[i]) {
+        result[i] -=32
       }
-    
-    result += arg[i:end]
+    } else if isUpper(result[i]) {
+      result[i] += 32
+    }
   }
-  return result
+  return string(result)
+}
+
+func main() {
+
+if len(os.Args) > 1 {
+
+  for _, args := range os.Args[1:] {
+    result := reverseStrCap(args)
+
+    for _, char := range result {
+      z01.PrintRune(char)
+    }
+  }
+}
+
 }
