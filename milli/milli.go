@@ -1,46 +1,43 @@
 package main
 
 import (
-	"os"
-
-	"github.com/01-edu/z01"
+	"fmt"
 )
- 
-
-func isLower(s rune) bool {
-	return s >= 'a' && s <= 'z'
-}
-
-func isUpper(s rune) bool {
-	return s >= 'A' && s <= 'Z'
-}
-
-func reverseStrCap(s string) string {
-  result := []rune(s)
-
-	for i := 0 ; i < len(result); i++ {
-		if i == len(result)-1 || result[i+1] == ' ' {
-			if isLower(result[i]) {
-				result[i] -= 32
-			}
-		} else if isUpper(result[i]) {
-       result[i] += 32
-		}
-	}
-	return string(result)
-}
 
 func main() {
+	input1 := []uint{2, 3, 1, 1, 4}
+	fmt.Println(CanJump(input1)) // Should print: true
 
-	if len(os.Args) > 1 {
-		for _ , char := range os.Args[1:] {
-			result := reverseStrCap(char)
+	input2 := []uint{3, 2, 1, 0, 4}
+	fmt.Println(CanJump(input2)) // Should print: false
 
-			for _, char := range result {
-				z01.PrintRune(char)
-			} 
-		}
-		
+	input3 := []uint{0}
+	fmt.Println(CanJump(input3))  // Should print: true
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
 	}
+	return b
+}
 
+func CanJump(steps []uint) bool {
+
+if len(steps) == 0 {
+	return false
+}
+
+maxjump := 0
+
+for i := 0; i < len(steps); i++ {
+	if i > maxjump {
+		return false
+	}
+maxjump = max(maxjump, i+int(steps[i]))
+if maxjump >= len(steps)-1 {
+	return true
+}
+}  
+return false
 }
