@@ -5,36 +5,31 @@ import (
 )
 
 func main() {
-	fmt.Println(Itoa(12345))
-	fmt.Println(Itoa(0))
-	fmt.Println(Itoa(-1234))
-	fmt.Println(Itoa(987654321))
+	fmt.Println(IsCapitalized("Hello! How are you?"))
+	fmt.Println(IsCapitalized("Hello How Are You"))
+	fmt.Println(IsCapitalized("Whats 4this 100K?"))
+	fmt.Println(IsCapitalized("Whatsthis4"))
+	fmt.Println(IsCapitalized("!!!!Whatsthis4"))
+	fmt.Println(IsCapitalized(""))
 }
 
-func Itoa(n int) string {
-
-	if n == 0 {
-		return "0"
-	}
-   
-isNegative := n < 0
-
-if isNegative {
-	n = - n
+func isLower(s byte) bool {
+	return s >= 'a' && s <= 'z'
 }
 
-var result string
+func IsCapitalized(s string) bool {
+ if s == "" {
+	return false
+ }
 
-for n > 0 {
-	digits := n %10
-  result = string(rune(digits + '0')) + result
-	n/=10
-}
+ for i := 0; i < len(s); i++ {
+	  if i != 0 && s[i-1] == ' ' && isLower(s[i]) {
+			return false
+		}
 
-if isNegative {
-	result = "-" + result
-}
-
-
-return result
+		if isLower(s[0]) {
+			return false
+		}
+ }
+ return true
 }
