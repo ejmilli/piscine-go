@@ -14,29 +14,30 @@ func main() {
 }
 
 func CamelToSnakeCase(s string) string{
-  if s == " " {
+
+if s == "" {
+	return s 
+}
+
+for _ , char := range s {
+if !(char >= 'a' || char <= 'z') && !(char >= 'A' || char <= 'Z') {
+	return s
+}
+}
+
+var result string 
+
+for i := 0; i < len(s); i++ {
+	if i != 0 && s[i] >= 'A' && s[i] <= 'Z' && !(s[i-1] >= 'A' && s[i-1] <= 'Z') {
+		result += "_"
+		result += string(s[i])
+	} else if s[i] >= 'a' && s[i] <= 'z' {
+		result += string(s[i]) 
+	} else if i == 0 &&  s[i] >= 'A' && s[i] <= 'Z' {
+		result += string(s[i]) 
+	} else {
 		return s
 	}
-
-	for _ , char := range s {
-		if !(char >= 'a' || char <= 'z') && !(char >= 'A' || char <= 'Z') {
-			return s
-		} 
-	}
-
-	var result string 
-
-	for i := 0 ; i < len(s); i++ {
-		if i != 0 && s[i] >= 'A' && s[i] <= 'Z' && !(s[i-1] >='A' && s[i-1] <= 'Z') {
-			result += "_" 
-			result += string(s[i])
-		} else if s[i] >= 'a' && s[i] <= 'z' {
-			result += string(s[i])
-		} else if i == 0 && s[i] >= 'A' && s[i] <= 'Z' {
-       result += string(s[i])
-		} else {
-			return s
-		}
-	}
- return result
+} 
+return result
 }
