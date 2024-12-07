@@ -1,41 +1,67 @@
 package main
 
 import (
-	"fmt"
 	"os"
-	"strconv"
+
+	"github.com/01-edu/z01"
 )
 
+func isPrime(n int) bool {
+	for i := 2; i*i <= n; i++ {
+		if n%i == 0 {
+			return false
+		}
+	}
+	return true
+}
 
-func isFactor(n int)  {
+func isSum(n int) int {
+	sum := 0
+	for i := 2; i <= n; i++ {
+		if isPrime(i) {
+			sum += i
+		}
+	}
+	return sum
+}
 
-
-	if n <= 1 {
+func isDigits(n int) {
+	if n == 0 {
 		return
 	}
 
-	factor := 2
+	isDigits(n / 10)
+	z01.PrintRune(rune(n%10+'0'))
+}
 
-	for n > 1 {
-		if n%factor == 0 {
-			fmt.Print(factor)
-			n/=factor
-			if n > 1 {
-				fmt.Print("*")
-			} 
-		} else {
-			factor++
-		}
+func printNumber(n int) {
+
+	if n == 0 {
+		z01.PrintRune('0')
+		return
 	}
+
+	isDigits(n)
 }
 
 func main() {
-
-	if len(os.Args) == 2 {
-		 input , err := strconv.Atoi(os.Args[1]) 
-		 if err == nil {
-			isFactor(input)
-		 }
-		 fmt.Println()
+	if len(os.Args) != 2 {
+		z01.PrintRune('0')
+		z01.PrintRune('\n')
+		return
 	}
+
+	args := os.Args[1]
+	n := 0
+
+	for _, char := range args {
+		if char < '0' || char > '9' {
+			z01.PrintRune('0')
+			return
+		}
+		n = n *10 + int(char-'0') 
+	}
+	result := isSum(n)
+	printNumber(result)
+	z01.PrintRune('\n')
 }
