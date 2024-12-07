@@ -1,35 +1,45 @@
 package main
 
-import (
-	"os"
-
-	"github.com/01-edu/z01"
-)
+import "github.com/01-edu/z01"
 
 func main() {
+	PrintMemory([10]byte{'h', 'e', 'l', 'l', 'o', 16, 21, '*'})
+}
 
-	if len(os.Args) != 3 {
-		return
+
+func HextoRune(s byte) rune {
+
+	if s < 10 {
+		return rune(s + '0')
 	}
- 
-	i := 0
-	j := 0
+	return rune(s-10+'a')
+}
 
-	str1 := os.Args[1]
-	str2 := os.Args[2]
+func PrintMemory(arr [10]byte) {
+	  
+	for i, char := range arr {
+       firstDigit := char /16
+       secondDigit := char %16
+
+			 z01.PrintRune(HextoRune(firstDigit))
+			 z01.PrintRune(HextoRune(secondDigit))
 
 
-	for i < len(str1) && j < len(str2) {
-		if str1[i] == str2[j] {
-			i++
+
+			 if (i+1)%4 == 0 || i == len(arr)-1 {
+				z01.PrintRune('\n')
+			 } else {
+				z01.PrintRune(' ')
+			 }
+	}
+
+	for _, char := range arr {
+		if char >= 33 && char <= 126 {
+			z01.PrintRune(rune(char))
+		} else {
+			z01.PrintRune('.')
 		}
-		j++
-	}
-	if i == len(str1) {
-		z01.PrintRune('1')
-	} else {
-		z01.PrintRune('0')
+		
 	}
 	z01.PrintRune('\n')
-
 }
