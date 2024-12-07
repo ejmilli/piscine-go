@@ -1,67 +1,45 @@
 package main
 
 import (
-	"os"
-
-	"github.com/01-edu/z01"
+	"fmt"
 )
 
-func isPrime(n int) bool {
-	for i := 2; i*i <= n; i++ {
-		if n%i == 0 {
-			return false
-		}
-	}
-	return true
-}
-
-func isSum(n int) int {
-	sum := 0
-	for i := 2; i <= n; i++ {
-		if isPrime(i) {
-			sum += i
-		}
-	}
-	return sum
-}
-
-func isDigits(n int) {
-	if n == 0 {
-		return
-	}
-
-	isDigits(n / 10)
-	z01.PrintRune(rune(n%10+'0'))
-}
-
-func printNumber(n int) {
-
-	if n == 0 {
-		z01.PrintRune('0')
-		return
-	}
-
-	isDigits(n)
-}
-
 func main() {
-	if len(os.Args) != 2 {
-		z01.PrintRune('0')
-		z01.PrintRune('\n')
-		return
+	input1 := []uint{2, 3, 1, 1, 4}
+	fmt.Println(CanJump(input1)) // Should print: true
+
+	input2 := []uint{3, 2, 1, 0, 4}
+	fmt.Println(CanJump(input2)) // Should print: false
+
+	input3 := []uint{0}
+	fmt.Println(CanJump(input3))  // Should print: true
+}
+
+
+func max(a, b int) int {
+
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func CanJump(steps []uint) bool {
+
+	if len(steps) == 0 {
+		return false
 	}
 
-	args := os.Args[1]
-	n := 0
+	maxjump := 0
 
-	for _, char := range args {
-		if char < '0' || char > '9' {
-			z01.PrintRune('0')
-			return
+	for i := 0; i < len(steps); i++ {
+	if	i > maxjump {
+          return false
 		}
-		n = n *10 + int(char-'0') 
+    maxjump = max(maxjump, i+int(steps[i]))
+		if maxjump == len(steps)-1 ||  len(steps) == 1 {
+			return true
+		}
 	}
-	result := isSum(n)
-	printNumber(result)
-	z01.PrintRune('\n')
+	return false
 }

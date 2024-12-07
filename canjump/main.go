@@ -15,26 +15,29 @@ func main() {
 	fmt.Println(CanJump(input3))  // Should print: true
 }
 
+
 func max(a, b int) int {
+
 	if a > b {
 		return a
 	}
 	return b
 }
 
-func CanJump(steps []uint) bool { // Changed 'unit' to '[]uint'
+func CanJump(steps []uint) bool {
+
 	if len(steps) == 0 {
-		return false // Fixed typo from 'retrun' to 'return'
+		return false
 	}
 
 	maxjump := 0
-	for i := 0; i < len(steps); i++ {
-		if i > maxjump {
-			return false // Fixed typo, added 'return' keyword
-		}
 
-		maxjump = max(maxjump, i+int(steps[i]))
-		if maxjump >= len(steps)-1 { // Changed to '>=' to allow reaching the last index
+	for i := 0; i < len(steps); i++ {
+	if	i > maxjump {
+          return false
+		}
+    maxjump = max(maxjump, i+int(steps[i]))
+		if maxjump == len(steps)-1 ||  len(steps) == 1 {
 			return true
 		}
 	}
