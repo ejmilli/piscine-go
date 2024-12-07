@@ -6,41 +6,30 @@ import (
 	"github.com/01-edu/z01"
 )
 
-func isContain(s string, r rune) bool {
-	for _, char := range s {
-		if char == r {
-			return true
-		}
-	}
-	return false
-}
- 
-
 func main() {
-  
+
 	if len(os.Args) != 3 {
-		return 
+		return
 	}
+ 
+	i := 0
+	j := 0
 
 	str1 := os.Args[1]
 	str2 := os.Args[2]
- var result string
 
-	for _ , char := range str1 {
-		if !isContain(result, char) {
-			result += string(char)
-		}
-	}
-	for _ , char := range str2 {
-		if !isContain(result, char) {
-			result += string(char)
-		}
-	}
 
-	for _ , char := range result {
-		z01.PrintRune(char)
+	for i < len(str1) && j < len(str2) {
+		if str1[i] == str2[j] {
+			i++
+		}
+		j++
+	}
+	if i == len(str1) {
+		z01.PrintRune('1')
+	} else {
+		z01.PrintRune('0')
 	}
 	z01.PrintRune('\n')
-
 
 }
