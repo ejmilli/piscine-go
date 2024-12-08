@@ -5,29 +5,25 @@ import (
 )
 
 func main() {
-	fmt.Print(LastWord("this        ...       is sparta, then again, maybe    not"))
-	fmt.Print(LastWord(" lorem,ipsum "))
-	fmt.Print(LastWord(" "))
+    fmt.Print(FirstWord("hello there"))
+    fmt.Print(FirstWord(""))
+    fmt.Print(FirstWord("hello   .........  bye"))
 }
 
-func LastWord(s string) string {
-	var lastWord string 
-	var currentWord string 
+func FirstWord(s string) string {
 
-	for _, char := range s {
-		if char == ' ' {
-			if currentWord != "" {
-				lastWord = currentWord
-			}
-			currentWord  = ""
-		} else {
-			currentWord += string(char)
+
+	var firstWord string 
+	inWord := false
+
+	for _ , char := range s {
+		if char != ' ' {
+			firstWord += string(char)
+			inWord = true
+		} else if inWord {
+			break
 		}
 	}
+	return firstWord + "\n"
 
-	if currentWord != "" {
-		lastWord = currentWord
-	}
-
-	return lastWord + "\n"
 }
