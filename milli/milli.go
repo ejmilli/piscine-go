@@ -2,30 +2,45 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 )
 
-func main() {
-	fmt.Println(ZipString("YouuungFellllas"))
-	fmt.Println(ZipString("Thee quuick browwn fox juumps over the laaazy dog"))
-	fmt.Println(ZipString("Helloo Therre!"))
+func isFactor(n int) {
+
+
+if n <= 1 {
+	return
 }
 
-func ZipString(s string) string {
+factor := 2 
  
-i := 0
-var result string 
-
-for i < len(s) {
-	 count := 1
-	 char := s[i]
-
-	 for i+1 < len(s) && s[i+1] == char {
-		count++
-		i++
-	 }
-	 i++
-	 result += strconv.Itoa(count) + string(char)
+for n > 1 {
+	if n%factor == 0 {
+		fmt.Print(factor)
+		n/=factor
+	if n > 1 {
+		fmt.Print("*")
+	}
+	} else {
+		factor++
+	}
+} 
 }
-return result
+
+func main() {
+
+	if len(os.Args) != 2 {
+		return
+	}
+
+	input , err := strconv.Atoi(os.Args[1]) 
+		if err != nil || input <= 1 {
+			return
+		}
+	
+
+	isFactor(input)
+	fmt.Println()
+
 }
