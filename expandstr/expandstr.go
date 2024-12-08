@@ -7,28 +7,34 @@ import (
 )
 
 func main() {
-
 	if len(os.Args) != 2 {
 		return
 	}
 
-	str := os.Args[1]
+	input := os.Args[1]
+	result := ""
 	inWord := false
 
-	for i, char := range str {
-		if char == ' ' || char == '\t' {
-			if inWord && i != 0 && str[i-1] != ' ' && str[i-1] != '\t' {
-				if i < len(str)-1 {
-					z01.PrintRune(' ')
-					z01.PrintRune(' ')
-					z01.PrintRune(' ')
-
-				}
-			}
-		} else {
-			z01.PrintRune(char)
+	for _, char := range input {
+		//if char != ' ' && char != '\t' {
+		if char > ' ' {
+			result += string(char)
 			inWord = true
+		} else if inWord {
+			// Only add exactly three spaces when transitioning out of a word
+			result += "   "
+			inWord = false
 		}
+	}
+
+	// Remove any extra spaces at the end of result
+	if len(result) > 3 && result[len(result)-3:] == "   " {
+		result = result[:len(result)-3]
+	}
+
+	// Print the result
+	for _, char := range result {
+		z01.PrintRune(char)
 	}
 	z01.PrintRune('\n')
 }

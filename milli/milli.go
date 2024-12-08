@@ -6,32 +6,32 @@ import (
 	"github.com/01-edu/z01"
 )
 
-
 func main() {
-
-	if len(os.Args) != 3 {
-		return
-	}
-
-	i := 0
-	j := 0
-
-	str1 := os.Args[1]
-	str2 := os.Args[2]
-
-	for i < len(str1) && j < len(str2) {
-		if str1[i] == str2[j] {
-  i++
-		}
-		j++
-	}
-
-if i == len(str1) {
-	for _ , char := range str1 {
-		z01.PrintRune(char)
-	}
-	z01.PrintRune('\n')
-
+if len(os.Args) != 2 {
+	return
 }
+
+str := os.Args[1]
+inWord := false
+var result string
+
+for _ , char := range str {
+	if char > ' ' {
+		result += string(char)
+		inWord = true
+	} else if inWord {
+		result += "   "
+		inWord = false
+	}
+}
+
+if len(result) > 3 && result[len(result)-3:] == "   " {
+	result = result[:len(result)-3]
+}
+
+for _, char := range result {
+	z01.PrintRune(char)
+}
+z01.PrintRune('\n')
 
 }
