@@ -10,25 +10,27 @@ func main() {
 	fmt.Print(LastWord(" "))
 }
 
+
+
 func LastWord(s string) string {
-	var lastWord string
-	foundWord := false
+	lastWord := ""
+	currentWord := ""
 
 	for _, char := range s {
 		if char == ' ' {
-			if !foundWord {
-				continue
+			if currentWord != "" {
+				lastWord = currentWord
 			}
-
-			if foundWord {
-				break
-
-			}
-
+			currentWord = ""
+		} else {
+			currentWord += string(char)
 		}
-		lastWord = lastWord + string(char)
-		foundWord = true
-
 	}
-	return lastWord + "\n"
+
+
+	if currentWord != "" {
+		lastWord = currentWord
+	}
+
+	return lastWord
 }

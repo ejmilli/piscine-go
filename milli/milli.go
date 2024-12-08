@@ -1,37 +1,33 @@
 package main
 
 import (
-	"os"
-
-	"github.com/01-edu/z01"
+	"fmt"
 )
 
 func main() {
-if len(os.Args) != 2 {
-	return
+	fmt.Print(LastWord("this        ...       is sparta, then again, maybe    not"))
+	fmt.Print(LastWord(" lorem,ipsum "))
+	fmt.Print(LastWord(" "))
 }
 
-str := os.Args[1]
-inWord := false
-var result string
+func LastWord(s string) string {
+	var lastWord string 
+	var currentWord string 
 
-for _ , char := range str {
-	if char > ' ' {
-		result += string(char)
-		inWord = true
-	} else if inWord {
-		result += "   "
-		inWord = false
+	for _, char := range s {
+		if char == ' ' {
+			if currentWord != "" {
+				lastWord = currentWord
+			}
+			currentWord  = ""
+		} else {
+			currentWord += string(char)
+		}
 	}
-}
 
-if len(result) > 3 && result[len(result)-3:] == "   " {
-	result = result[:len(result)-3]
-}
+	if currentWord != "" {
+		lastWord = currentWord
+	}
 
-for _, char := range result {
-	z01.PrintRune(char)
-}
-z01.PrintRune('\n')
-
+	return lastWord + "\n"
 }

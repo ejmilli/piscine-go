@@ -1,43 +1,53 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
+
+func isUpper(s rune) bool {
+	return s >= 'A' && s <= 'Z'
+}
+
+func isLower(s rune) bool {
+	return s >= 'a' && s <= 'z'
+}
+
+
+func CamelToSnakeCase(s string) string {
+	result := ""
+	for i := 0; i < len(s); i++ {
+		if isLower(rune(s[i])) || (i == 0 && isUpper(rune(s[i]))) {
+			result += string(s[i])
+		} else if i != 0 && isUpper(rune(s[i])) && i+1 < len(s) && isLower(rune(s[i+1])) {
+			result += "_"
+			result += string(s[i])
+		} else {
+			return s
+		}
+
+	}
+	return result
+}
 
 func main() {
-	fmt.Println(CamelToSnakeCase("HelloWorld"))
-	fmt.Println(CamelToSnakeCase("helloWorld"))
-	fmt.Println(CamelToSnakeCase("camelCase"))
-	fmt.Println(CamelToSnakeCase("CAMELtoSnackCASE"))
-	fmt.Println(CamelToSnakeCase("camelToSnakeCase"))
-	fmt.Println(CamelToSnakeCase("hey2"))
-}
-
-func CamelToSnakeCase(s string) string{
-
-if s == "" {
-	return s 
-}
-
-for _ , char := range s {
-if !(char >= 'a' || char <= 'z') && !(char >= 'A' || char <= 'Z') {
-	return s
-}
-}
-
-var result string 
-
-for i := 0; i < len(s); i++ {
-	if i != 0 && s[i] >= 'A' && s[i] <= 'Z' && !(s[i-1] >= 'A' && s[i-1] <= 'Z') {
-		result += "_"
-		result += string(s[i])
-	} else if s[i] >= 'a' && s[i] <= 'z' {
-		result += string(s[i]) 
-	} else if i == 0 &&  s[i] >= 'A' && s[i] <= 'Z' {
-		result += string(s[i]) 
-	} else {
-		return s
+	args := []string{
+		"CamelCase",
+		"CAMELCase",
+		"HelloWorld",
+		"132",
+		" ",
+		"",
+		"A",
+		"abcs",
+		"AbC",
+		"AbCEf",
+		"abcAree",
+		"ahe1Abde",
+		"TesTing",
+		"SOMEVARIABLE",
+		"ASuperLonGVariableName",
+		"thisIsaTestOfCamelCase",
+		"aA",
 	}
-} 
-return result
+	for _, arg := range args {
+		fmt.Println(CamelToSnakeCase(arg))
+	}
 }
