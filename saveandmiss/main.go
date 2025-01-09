@@ -18,7 +18,7 @@ func SaveAndMiss(arg string, num int) string {
 		return arg // If num is 0 or negative, return the full string
 	}
 
-	result := ""
+	resul := ""
 
 	for i := 0; i < len(arg); i += 2 * num {
 		end := i + num
@@ -27,7 +27,7 @@ func SaveAndMiss(arg string, num int) string {
 		}
 
 		// Concatenate the selected characters to the result string
-		result += arg[i:end]
+		resul += arg[i:end]
 	}
-	return result
+	return resul
 }
